@@ -11,6 +11,7 @@ import { ErrorHanlder } from "./components/ErrorHandler";
 
 import stylesheet from "./tailwind.css";
 import NavBar from "./components/NavBar";
+import { DiscoverProvider } from "./context";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -31,10 +32,12 @@ export default function App() {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
       </head>
       <body>
-        <div className="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-16">
-          <NavBar />
-          <Outlet />
-        </div>
+        <DiscoverProvider>
+          <div className="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-16">
+            <NavBar />
+            <Outlet />
+          </div>
+        </DiscoverProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

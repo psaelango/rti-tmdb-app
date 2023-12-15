@@ -1,29 +1,43 @@
 import React from "react";
-import { Movie } from "../../types";
+import { Movie, TvShow } from "../../types";
+import { FavoriteSVG, StarSVG } from "../../components/svg";
 import { TrailerSection } from "./TrailerSection";
+import { BackdropCard } from "./BackdropCard";
+import { IconButton } from "../../components/buttons/IconButton";
 import { InfoSection } from "./InfoSection";
 
-const DetailScreen: React.FC<Movie> = (movie) => {
-  const { title, overview, poster_path } = movie;
-
+const DetailScreen: React.FC<Movie | TvShow> = (info) => {
   return (
-    <div className="bg-white flex flex-col items-stretch max-w-6xl mx-auto l:mt-0 md:mt-2 sm:mt-10 mt-14">
+    <div className="bg-gray-100 dark:bg-gray-800 flex flex-col items-stretch max-w-6xl mx-auto l:mt-0 md:mt-2 sm:mt-10 mt-14">
       <div className="text-white text-xl font-medium leading-6 whitespace-nowrap shadow-sm bg-stone-500 w-full justify-center pl-4 pr-16 py-5 items-start">
-        {title}
+        {info.typeId === "Movie" ? info.title : info.name}
       </div>
-      <div className="flex w-full flex-col items-stretch mt-6 mb-3 px-6">
-        <div className="flex items-stretch justify-between gap-4">
-          <img
-            loading="lazy"
-            src={`https://image.tmdb.org/t/p/w185/${poster_path}`}
-            className="aspect-[0.68] object-contain object-center w-[115px] overflow-hidden shrink-0 max-w-full"
-          />
-          <InfoSection {...movie} />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row -mx-4">
+          <div className="md:flex-1 px-4">
+            <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+              <BackdropCard {...info} />
+            </div>
+            <div className="flex -mx-2 mb-4">
+              <div className="w-1/2 px-2">
+                <IconButton
+                  text="Add to Favorite"
+                  Icon={<StarSVG className="w-6 h-6" fill="white" />}
+                />
+              </div>
+              <div className="w-1/2 px-2">
+                <IconButton
+                  text="Add to Wishlist"
+                  Icon={<FavoriteSVG className="w-6 h-6" />}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="md:flex-1 px-4">
+            <InfoSection {...info} />
+            <TrailerSection />
+          </div>
         </div>
-        <div className="text-neutral-500 text-sm font-medium leading-6 mt-8">
-          {overview}
-        </div>
-        <TrailerSection />
       </div>
     </div>
   );

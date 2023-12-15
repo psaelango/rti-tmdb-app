@@ -11,5 +11,5 @@ export async function loader() {
 }
 
 export default function PopularMovies() {
-  return <DiscoveryScreen />;
+  return <DiscoveryScreen type="movie" />;
 }

@@ -1,12 +1,21 @@
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { ApiResponse } from "../../types";
 import PosterCard from "./PosterCard";
+import { useContext } from "react";
+import { DiscoverContext } from "~/context";
 
-const DiscoveryScreen = () => {
+const DiscoveryScreen = ({ type }: { type: string }) => {
+  const { setDiscovering } = useContext(DiscoverContext);
   const navigate = useNavigate();
   const data = useLoaderData() as ApiResponse;
   const items = data.results || [];
-  const onItemelect = (id: number) => navigate(`/movie/${id}`);
+  const onItemelect = (id: number) => {
+    setDiscovering({
+      category: "",
+      type: type === "movie" ? "Movie Info" : "TV Show Info",
+    });
+    navigate(`/${type}/${id}`);
+  };
 
   return (
     <section className="xl:mt-10 md:mt-12 sm:mt-15 mt-20">

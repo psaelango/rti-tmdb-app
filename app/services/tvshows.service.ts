@@ -1,6 +1,5 @@
 import { APIService } from "./api.service";
-
-class MoviesService extends APIService {
+class TvShowsService extends APIService {
   protected apiKey: string;
 
   constructor() {
@@ -22,20 +21,20 @@ class MoviesService extends APIService {
       });
   }
 
-  getPopularMovies() {
-    return this.callApi("/movie/popular");
+  getPopularShows() {
+    return this.callApi("/tv/popular");
   }
 
-  getTopratedMovies() {
-    return this.callApi("/movie/top_rated");
+  getTopratedShows() {
+    return this.callApi("/tv/top_rated");
   }
 
-  async getMovieInfo(movieId: string) {
-    const apiUrl = `/movie/${movieId}`;
+  async getShowInfo(showId: string) {
+    const apiUrl = `/tv/${showId}`;
     const response = await this.callApi(apiUrl);
-    response.typeId = "Movie";
+    response.typeId = "TvShow";
     return response;
   }
 }
 
-export const moviesService = new MoviesService();
+export const tvShowsService = new TvShowsService();
