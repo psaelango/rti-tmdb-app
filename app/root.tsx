@@ -7,11 +7,17 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { ErrorHanlder } from "./components/ErrorHandler";
+
 import stylesheet from "./tailwind.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
 ];
+
+export function ErrorBoundary() {
+  return <ErrorHanlder />;
+}
 
 export default function App() {
   return (
