@@ -10,6 +10,7 @@ import {
 import { ErrorHanlder } from "./components/ErrorHandler";
 
 import stylesheet from "./tailwind.css";
+import NavBar from "./components/NavBar";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -27,9 +28,13 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
       </head>
       <body>
-        <Outlet />
+        <div className="max-w-screen-xl mx-auto p-5 sm:p-8 md:p-16">
+          <NavBar />
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

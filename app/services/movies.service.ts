@@ -22,6 +22,20 @@ class MoviesService extends APIService {
       });
   }
 
+  getTopratedMovies() {
+    return this.get("/movie/top_rated", {
+      params: {
+        api_key: this.apiKey,
+      },
+    })
+      .then((response) => {
+        return response?.data;
+      })
+      .catch((error) => {
+        throw error?.response?.data;
+      });
+  }
+
   getMovieInfo(id: string) {
     return this.get(`/movie/${id}`, {
       params: {
